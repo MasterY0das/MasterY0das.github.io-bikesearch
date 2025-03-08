@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeMatch - Find Your Perfect Ride</title>
+    <style>
+        :root {
+            --primary: #FF9900;
+            --primary-dark: #E68A00;
+            --secondary: #232F3E;
+            --accent: #48A3FF;
+            --dark: #131921;
+            --light: #f8f8f8;
+            --success: #39B54A;
+            --warning: #FFD814;
+            --danger: #CC0C39;
+            --gray-light: #eaeded;
+            --gray: #DDD;
+            --text-dark: #0F1111;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--secondary), var(--dark));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1 {
+            margin-bottom: 0.3rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #E3E3E3;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        select:focus, input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(72, 163, 255, 0.2);
+            outline: none;
+        }
+        
+        .slider-container {
+            margin-top: 0.5rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;  
+            background: var(--gray);
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%; 
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.1s;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.1s;
+            border: none;
+        }
+        
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: var(--text-dark);
+            border: none;
+            padding: 0.85rem 1.7rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            display: block;
+            margin: 1.5rem auto 0.5rem;
+            min-width: 200px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .bike-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .bike-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 1px solid #E3E3E3;
+        }
+        
+        .bike-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .bike-image {
+            height: 200px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            position: relative;
+        }
+        
+        .bike-image img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+        }
+        
+        .bike-details {
+            padding: 1.2rem;
+        }
+        
+        .bike-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+        }
+        
+        .bike-year {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+        
+        .bike-manufacturer {
+            color: #717171;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .bike-spec {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--gray-light);
+            padding-top: 1rem;
+        }
+        
+        .bike-spec span {
+            display: block;
+        }
+        
+        .spec-label {
+            font-size: 0.8rem;
+            color: #717171;
+        }
+        
+        .spec-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .match-score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--success);
+            color: white;
+            padding: 0.4rem 0.7rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+        
+        .free-shipping {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--primary);
+            color: var(--text-dark);
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            z-index: 2;
+        }
+        
+        .loading {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .preferences-summary {
+            background-color: rgba(255, 217, 20, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+        
+        .preferences-summary h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .preferences-summary ul {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .preferences-summary li {
+            background-color: rgba(255, 217, 20, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .error {
+            color: var(--danger);
+            margin-top: 0.5rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s;
+        }
+        
+        .close-modal:hover {
+            color: var(--text-dark);
+        }
+        
+        .section-title {
+            color: var(--dark);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .similar-bikes {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--gray-light);
+        }
+        
+        .similar-bikes::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .similar-bikes::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+        
+        .similar-bikes::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
+        }
+        
+        .similar-bike-card {
+            min-width: 200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid var(--gray-light);
+            transition: transform 0.2s;
+        }
+        
+        .similar-bike-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .toggle-container {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 38px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        
+        .toggle-checkbox {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+        
+        .toggle-label:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--primary);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label:before {
+            transform: translateX(30px);
+        }
+        
+        .price-tag {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--danger);
+            margin: 0.5rem 0;
+        }
+        
+        .rating {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .sort-select {
+            width: auto;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .bike-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 1.5rem;
+            }
+            
+            .preferences-summary ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>BikeMatch</h1>
+            <p class="subtitle">Find your perfect ride with personalized recommendations</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <div class="filters-header">
+                <h2>Tell us your preferences</h2>
+                <p>We'll find the perfect match for you</p>
+            </div>
+            
+            <form id="preferences-form">
+                <div class="form-group">
+                    <label for="manufacturer">Preferred Manufacturer</label>
+                    <select id="manufacturer">
+                        <option value="">Any manufacturer</option>
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year-slider">Year: <span id="year-value">2023</span></label>
+                    <div class="slider-container">
+                        <input type="range" min="2000" max="2025" value="2023" class="slider" id="year-slider">
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 0.5rem;">
+                        <label for="any-year" style="display: inline; margin-right: 0.5rem;">Any year</label>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="any-year" class="toggle-checkbox" checked>
+                            <label for="any-year" class="toggle-label"></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bike-type">Bike Type</label>
+                    <select id="bike-type">
+                        <option value="">Any type</option>
+                        <option value="road">Road</option>
+                        <option value="mountain">Mountain</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="commuter">Commuter</option>
+                        <option value="touring">Touring</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="price-range">Price Range</label>
+                    <select id="price-range">
+                        <option value="">Any price</option>
+                        <option value="budget">Budget (Under $500)</option>
+                        <option value="mid">Mid-range ($500-$1000)</option>
+                        <option value="premium">Premium ($1000-$2000)</option>
+                        <option value="high-end">High-end ($2000+)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn" id="find-bikes-btn">Find My Perfect Bike</button>
+            </form>
+        </div>
+        
+        <div id="results-section" style="display: none;">
+            <div class="preferences-summary" id="preferences-summary">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="results-header">
+                <h2>Recommended Bikes For You</h2>
+                <div>
+                    <label for="sort-by" style="display: inline;">Sort by:</label>
+                    <select id="sort-by" class="sort-select">
+                        <option value="match">Best Match</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="year">Newest First</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Finding your perfect bikes...</p>
+            </div>
+            
+            <div class="bike-list" id="bike-list">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="bike-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <div id="modal-content">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global variables
+        let manufacturers = [];
+        let recommendedBikes = [];
+        let userPreferences = {};
+        
+        // Constants
+        const BIKEBOOK_API = 'https://bikebook.io';
+        const BIKE_IMAGES = {
+            'road': '/api/placeholder/400/300?text=Road+Bike',
+            'mountain': '/api/placeholder/400/300?text=Mountain+Bike',
+            'hybrid': '/api/placeholder/400/300?text=Hybrid+Bike',
+            'commuter': '/api/placeholder/400/300?text=Commuter+Bike',
+            'touring': '/api/placeholder/400/300?text=Touring+Bike',
+            'default': '/api/placeholder/400/300?text=Bike+Image'
+        };
+        
+        // Prices for mock data
+        const PRICE_RANGES = {
+            'budget': { min: 299, max: 499 },
+            'mid': { min: 500, max: 999 },
+            'premium': { min: 1000, max: 1999 },
+            'high-end': { min: 2000, max: 5000 }
+        };
+        
+        // DOM Elements
+        const manufacturerSelect = document.getElementById('manufacturer');
+        const yearSlider = document.getElementById('year-slider');
+        const yearValue = document.getElementById('year-value');
+        const anyYearCheckbox = document.getElementById('any-year');
+        const bikeTypeSelect = document.getElementById('bike-type');
+        const priceRangeSelect = document.getElementById('price-range');
+        const preferencesForm = document.getElementById('preferences-form');
+        const findBikesBtn = document.getElementById('find-bikes-btn');
+        const resultsSection = document.getElementById('results-section');
+        const preferencesSummary = document.getElementById('preferences-summary');
+        const bikeList = document.getElementById('bike-list');
+        const loadingElement = document.getElementById('loading');
+        const bikeModal = document.getElementById('bike-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalContent = document.getElementById('modal-content');
+        const sortBySelect = document.getElementById('sort-by');
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', initialize);
+        
+        function initialize() {
+            // Add event listeners
+            preferencesForm.addEventListener('submit', handleFormSubmit);
+            closeModal.addEventListener('click', () => bikeModal.style.display = 'none');
+            window.addEventListener('click', (e) => {
+                if (e.target === bikeModal) {
+                    bikeModal.style.display = 'none';
+                }
+            });
+            
+            // Year slider functionality
+            yearSlider.addEventListener('input', function() {
+                yearValue.textContent = this.value;
+                // Uncheck "Any year" when slider is moved
+                anyYearCheckbox.checked = false;
+            });
+            
+            // Any year checkbox functionality
+            anyYearCheckbox.addEventListener('change', function() {
+                yearSlider.disabled = this.checked;
+                yearSlider.style.opacity = this.checked ? "0.5" : "1";
+            });
+            
+            // Sort by select functionality
+            sortBySelect.addEventListener('change', sortBikes);
+            
+            // Set initial slider state
+            yearSlider.disabled = anyYearCheckbox.checked;
+            yearSlider.style.opacity = anyYearCheckbox.checked ? "0.5" : "1";
+            
+            // Fetch manufacturers and populate select
+            fetchManufacturers();
+        }
+        
+        // Fetch all manufacturers from the API
+        async function fetchManufacturers() {
+            try {
+                const response = await fetch(`${BIKEBOOK_API}/assets/index.json`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch manufacturers');
+                }
+                
+                const data = await response.json();
+                manufacturers = Object.keys(data).sort();
+                
+                // Populate the manufacturer dropdown
+                manufacturers.forEach(manufacturer => {
+                    const option = document.createElement('option');
+                    option.value = manufacturer;
+                    option.textContent = manufacturer;
+                    manufacturerSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching manufacturers:', error);
+                // Use mock data if API fails
+                mockManufacturers.forEach(manufacturer => {
+                    const option = document.createElement('option');
+                    option.value = manufacturer;
+                    option.textContent = manufacturer;
+                    manufacturerSelect.appendChild(option);
+                });
+            }
+        }
+        
+        // Handle form submission
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get user preferences
+            userPreferences = {
+                manufacturer: manufacturerSelect.value,
+                year: anyYearCheckbox.checked ? "" : yearSlider.value,
+                bikeType: bikeTypeSelect.value,
+                priceRange: priceRangeSelect.value
+            };
+            
+            // Reset recommended bikes
+            recommendedBikes = [];
+            
+            // Show results section and loading spinner
+            resultsSection.style.display = 'block';
+            loadingElement.style.display = 'block';
+            bikeList.innerHTML = '';
+            
+            // Display preferences summary
+            updatePreferencesSummary();
+            
+            // Get bike recommendations
+            getBikeRecommendations();
+            
+            // Scroll to results
+            setTimeout(() => {
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+        
+        // Update the preferences summary section
+        function updatePreferencesSummary() {
+            let summaryHTML = '<h3>Your Preferences</h3><ul>';
+            
+            if (userPreferences.manufacturer) {
+                summaryHTML += `<li><strong>Brand:</strong> ${userPreferences.manufacturer}</li>`;
+            } else {
+                summaryHTML += `<li><strong>Brand:</strong> Any</li>`;
+            }
+            
+            if (userPreferences.year) {
+                summaryHTML += `<li><strong>Year:</strong> ${userPreferences.year}</li>`;
+            } else {
+                summaryHTML += `<li><strong>Year:</strong> Any</li>`;
+            }
+            
+            if (userPreferences.bikeType) {
+                const bikeTypeText = bikeTypeSelect.options[bikeTypeSelect.selectedIndex].text;
+                summaryHTML += `<li><strong>Type:</strong> ${bikeTypeText}</li>`;
+            } else {
+                summaryHTML += `<li><strong>Type:</strong> Any</li>`;
+            }
+            
+            if (userPreferences.priceRange) {
+                const priceRangeText = priceRangeSelect.options[priceRangeSelect.selectedIndex].text;
+                summaryHTML += `<li><strong>Price:</strong> ${priceRangeText}</li>`;
+            } else {
+                summaryHTML += `<li><strong>Price:</strong> Any</li>`;
+            }
+            
+            summaryHTML += '</ul>';
+            preferencesSummary.innerHTML = summaryHTML;
+        }
+        
+        // Get bike recommendations based on user preferences
+        async function getBikeRecommendations() {
+            try {
+                // If manufacturer is selected, get models for that manufacturer
+                if (userPreferences.manufacturer) {
+                    let url = `${BIKEBOOK_API}/model_list?manufacturer=${encodeURIComponent(userPreferences.manufacturer)}`;
+                    
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch bike models');
+                    }
+                    
+                    const models = await response.json();
+                    
+                    // Get detailed information for each model
+                    await getDetailedBikeInfo(models);
+                } else {
+                    // If no manufacturer selected, use a few popular ones
+                    const popularManufacturers = ['Trek', 'Specialized', 'Giant', 'Cannondale', 'Fuji'];
+                    
+                    // Use whatever manufacturers we have if the API call failed earlier
+                    const manufacturersToUse = manufacturers.length > 0 ? 
+                        popularManufacturers.filter(m => manufacturers.includes(m)) : 
+                        mockManufacturers;
+                    
+                    for (const manufacturer of manufacturersToUse.slice(0, 3)) {
+                        let url = `${BIKEBOOK_API}/model_list?manufacturer=${encodeURIComponent(manufacturer)}`;
+                        
+                        try {
+                            const response = await fetch(url);
+                            if (response.ok) {
+                                const models = await response.json();
+                                await getDetailedBikeInfo(models, manufacturer);
+                            }
+                        } catch (error) {
+                            console.error(`Error fetching models for ${manufacturer}:`, error);
+                            // Use mock data
+                            await processMockBikeData(manufacturer);
+                        }
+                    }
+                }
+                
+                // Hide loading spinner
+                loadingElement.style.display = 'none';
+                
+                // Sort bikes by match score (default)
+                sortBikes();
+                
+                // Display results
+                displayRecommendations();
+            } catch (error) {
+                console.error('Error getting bike recommendations:', error);
+                loadingElement.style.display = 'none';
+                
+                // Use mock data if API fails
+                processMockBikeData(userPreferences.manufacturer || 'Trek');
+                sortBikes();
+                displayRecommendations();
+            }
+        }
+        
+        // Get detailed information for each bike model
+        async function getDetailedBikeInfo(models, manufacturer = userPreferences.manufacturer) {
+            const year = userPreferences.year || new Date().getFullYear();
+            const bikeType = userPreferences.bikeType;
+            
+            // Limit to 10 models to avoid too many API calls
+            const limitedModels = models.slice(0, 10);
+            
+            for (const model of limitedModels) {
+                try {
+                    const url = `${BIKEBOOK_API}?manufacturer=${encodeURIComponent(manufacturer)}&year=${year}&frame_model=${encodeURIComponent(model)}`;
+                    
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const bikeData = await response.json();
+                        
+                        // Add to recommended bikes if it matches the bike type filter
+                        // Continue from where the code was cut off
+                        if (!bikeType || (bikeData.type && bikeData.type.toLowerCase().includes(bikeType.toLowerCase()))) {
+                            // Calculate match score
+                            const matchScore = calculateMatchScore(bikeData);
+                            
+                            // Generate a random price based on the selected price range
+                            const price = generatePrice(userPreferences.priceRange);
+                            
+                            // Add bike to recommendations with match score
+                            recommendedBikes.push({
+                                manufacturer: manufacturer,
+                                model: model,
+                                year: bikeData.year || year,
+                                type: bikeData.type || 'Road',
+                                specs: bikeData,
+                                matchScore: matchScore,
+                                price: price,
+                                freeShipping: Math.random() > 0.5 // 50% chance of free shipping
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error fetching details for ${model}:`, error);
+                }
+            }
+        }
+        
+        // Calculate match score based on user preferences
+        function calculateMatchScore(bikeData) {
+            let score = 75; // Base score
+            
+            // Add points for exact manufacturer match
+            if (userPreferences.manufacturer && bikeData.manufacturer === userPreferences.manufacturer) {
+                score += 10;
+            }
+            
+            // Add points for year match (or close)
+            if (userPreferences.year) {
+                const yearDiff = Math.abs(parseInt(bikeData.year) - parseInt(userPreferences.year));
+                if (yearDiff === 0) {
+                    score += 10;
+                } else if (yearDiff <= 2) {
+                    score += 5;
+                }
+            }
+            
+            // Add points for bike type match
+            if (userPreferences.bikeType && bikeData.type && bikeData.type.toLowerCase().includes(userPreferences.bikeType.toLowerCase())) {
+                score += 10;
+            }
+            
+            // Random variation to avoid all bikes having the same score
+            score += (Math.random() * 5) - 2.5;
+            
+            // Ensure score is between 0 and 100
+            return Math.min(99, Math.max(70, Math.round(score)));
+        }
+        
+        // Generate a price based on the selected price range
+        function generatePrice(priceRange) {
+            if (!priceRange) {
+                // If no price range selected, generate a price between $300 and $5000
+                return Math.floor(Math.random() * 4700) + 300;
+            }
+            
+            const range = PRICE_RANGES[priceRange];
+            return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+        }
+        
+        // Process mock bike data when API fails
+        function processMockBikeData(manufacturer) {
+            const bikeTypes = ['road', 'mountain', 'hybrid', 'commuter', 'touring'];
+            const modelPrefixes = {
+                'Trek': ['Domane', 'Madone', 'Émonda', 'Fuel EX', 'Marlin', 'FX', 'Verve', '520'],
+                'Specialized': ['Tarmac', 'Roubaix', 'Stumpjumper', 'Rockhopper', 'Sirrus', 'Diverge', 'AWOL'],
+                'Giant': ['Defy', 'TCR', 'Contend', 'Talon', 'Fathom', 'Escape', 'FastRoad', 'Revolt'],
+                'Cannondale': ['SuperSix', 'CAAD', 'Synapse', 'Scalpel', 'Trail', 'Quick', 'Topstone', 'Touring'],
+                'Fuji': ['Roubaix', 'SL', 'Nevada', 'Tahoe', 'Absolute', 'Touring', 'Jari'],
+                'default': ['Model A', 'Model B', 'Model C', 'Model D', 'Model E', 'Model F', 'Model G']
+            };
+            
+            const prefixes = modelPrefixes[manufacturer] || modelPrefixes.default;
+            const year = userPreferences.year || (Math.floor(Math.random() * 6) + 2020); // Random year between 2020-2025
+            const targetType = userPreferences.bikeType || bikeTypes[Math.floor(Math.random() * bikeTypes.length)];
+            
+            // Generate 6-10 random bikes
+            const numBikes = Math.floor(Math.random() * 5) + 6;
+            
+            for (let i = 0; i < numBikes; i++) {
+                const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+                const modelNumber = Math.floor(Math.random() * 9) + 1;
+                const model = `${prefix} ${modelNumber}00`;
+                
+                // Determine bike type based on model prefix or user preference
+                let type;
+                if (targetType) {
+                    type = targetType;
+                } else {
+                    // Assign a bike type based on the model prefix
+                    if (prefix.includes('Domane') || prefix.includes('Tarmac') || prefix.includes('Roubaix') || prefix.includes('TCR')) {
+                        type = 'road';
+                    } else if (prefix.includes('Fuel') || prefix.includes('Stumpjumper') || prefix.includes('Talon')) {
+                        type = 'mountain';
+                    } else if (prefix.includes('FX') || prefix.includes('Sirrus') || prefix.includes('Escape')) {
+                        type = 'hybrid';
+                    } else if (prefix.includes('Verve') || prefix.includes('Quick') || prefix.includes('FastRoad')) {
+                        type = 'commuter';
+                    } else if (prefix.includes('520') || prefix.includes('AWOL') || prefix.includes('Touring')) {
+                        type = 'touring';
+                    } else {
+                        type = bikeTypes[Math.floor(Math.random() * bikeTypes.length)];
+                    }
+                }
+                
+                // Calculate match score
+                let matchScore = 75;
+                if (userPreferences.manufacturer && manufacturer === userPreferences.manufacturer) {
+                    matchScore += 10;
+                }
+                if (userPreferences.year && year == userPreferences.year) {
+                    matchScore += 10;
+                }
+                if (userPreferences.bikeType && type === userPreferences.bikeType) {
+                    matchScore += 10;
+                }
+                
+                // Add random variation
+                matchScore += (Math.random() * 5) - 2.5;
+                matchScore = Math.min(99, Math.max(70, Math.round(matchScore)));
+                
+                // Generate price
+                const price = generatePrice(userPreferences.priceRange);
+                
+                // Add bike to recommendations
+                recommendedBikes.push({
+                    manufacturer: manufacturer,
+                    model: model,
+                    year: year,
+                    type: type,
+                    specs: {
+                        weight: (Math.random() * 6 + 7).toFixed(1) + ' kg',
+                        material: Math.random() > 0.7 ? 'Carbon' : 'Aluminum',
+                        gears: Math.floor(Math.random() * 12) + 9
+                    },
+                    matchScore: matchScore,
+                    price: price,
+                    freeShipping: Math.random() > 0.5
+                });
+            }
+        }
+        
+        // Sort bikes based on selected criteria
+        function sortBikes() {
+            const sortBy = sortBySelect.value;
+            
+            switch (sortBy) {
+                case 'match':
+                    recommendedBikes.sort((a, b) => b.matchScore - a.matchScore);
+                    break;
+                case 'price-low':
+                    recommendedBikes.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    recommendedBikes.sort((a, b) => b.price - a.price);
+                    break;
+                case 'year':
+                    recommendedBikes.sort((a, b) => b.year - a.year);
+                    break;
+                default:
+                    recommendedBikes.sort((a, b) => b.matchScore - a.matchScore);
+            }
+            
+            // Redisplay the bikes
+            if (bikeList.innerHTML !== '') {
+                displayRecommendations();
+            }
+        }
+        
+        // Display bike recommendations
+        function displayRecommendations() {
+            // Clear previous results
+            bikeList.innerHTML = '';
+            
+            // If no bikes found
+            if (recommendedBikes.length === 0) {
+                bikeList.innerHTML = `
+                    <div class="card" style="text-align: center; padding: 2rem;">
+                        <h3>No bikes found matching your criteria</h3>
+                        <p>Try adjusting your preferences for more results.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display each bike
+            recommendedBikes.forEach(bike => {
+                // Get image based on bike type
+                const imageUrl = BIKE_IMAGES[bike.type.toLowerCase()] || BIKE_IMAGES.default;
+                
+                // Create bike card element
+                const bikeCard = document.createElement('div');
+                bikeCard.className = 'bike-card';
+                bikeCard.onclick = () => showBikeDetails(bike);
+                
+                // Generate star rating
+                const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
+                const stars = '★'.repeat(Math.floor(rating)) + (rating % 1 > 0 ? '☆' : '') + '☆'.repeat(5 - Math.ceil(rating));
+                
+                bikeCard.innerHTML = `
+                    <div class="bike-image">
+                        <div class="match-score">${bike.matchScore}% Match</div>
+                        ${bike.freeShipping ? '<div class="free-shipping">Free Shipping</div>' : ''}
+                        <img src="${imageUrl}" alt="${bike.manufacturer} ${bike.model}">
+                    </div>
+                    <div class="bike-details">
+                        <div class="bike-year">${bike.year}</div>
+                        <div class="bike-name">${bike.manufacturer} ${bike.model}</div>
+                        <div class="bike-manufacturer">${bike.type} Bike</div>
+                        <div class="price-tag">$${bike.price.toLocaleString()}</div>
+                        <div class="rating">${stars} ${rating}</div>
+                        <div class="bike-spec">
+                            <div>
+                                <span class="spec-label">Weight</span>
+                                <span class="spec-value">${bike.specs.weight || '9.2 kg'}</span>
+                            </div>
+                            <div>
+                                <span class="spec-label">Material</span>
+                                <span class="spec-value">${bike.specs.material || 'Carbon'}</span>
+                            </div>
+                            <div>
+                                <span class="spec-label">Gears</span>
+                                <span class="spec-value">${bike.specs.gears || '11'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                bikeList.appendChild(bikeCard);
+            });
+        }
+        
+        // Show bike details in modal
+        function showBikeDetails(bike) {
+            // Get image based on bike type
+            const imageUrl = BIKE_IMAGES[bike.type.toLowerCase()] || BIKE_IMAGES.default;
+            
+            // Generate star rating
+            const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
+            const stars = '★'.repeat(Math.floor(rating)) + (rating % 1 > 0 ? '☆' : '') + '☆'.repeat(5 - Math.ceil(rating));
+            
+            // Get similar bikes
+            const similarBikes = getSimilarBikes(bike);
+            
+            // Create modal content
+            modalContent.innerHTML = `
+                <h2>${bike.manufacturer} ${bike.model} (${bike.year})</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <div style="position: relative;">
+                            <img src="${imageUrl}" alt="${bike.manufacturer} ${bike.model}" style="width: 100%; border-radius: 8px;">
+                            ${bike.freeShipping ? '<div class="free-shipping" style="position: absolute; top: 10px; left: 10px;">Free Shipping</div>' : ''}
+                        </div>
+                        <div class="rating" style="margin-top: 0.5rem; font-size: 1.1rem;">${stars} ${rating} (${Math.floor(Math.random() * 500) + 100} reviews)</div>
+                        <div class="price-tag" style="font-size: 1.8rem; margin: 0.5rem 0;">$${bike.price.toLocaleString()}</div>
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <div class="match-score" style="display: inline-block; margin-bottom: 1rem; font-size: 1rem;">${bike.matchScore}% Match with your preferences</div>
+                        <h3 class="section-title">Specifications</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Manufacturer:</strong> ${bike.manufacturer}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Model:</strong> ${bike.model}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Year:</strong> ${bike.year}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Type:</strong> ${bike.type} Bike</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Weight:</strong> ${bike.specs.weight || '9.2 kg'}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Frame Material:</strong> ${bike.specs.material || 'Carbon'}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Gears:</strong> ${bike.specs.gears || '11'}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Brakes:</strong> ${Math.random() > 0.5 ? 'Hydraulic Disc' : 'Mechanical Disc'}</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Wheels:</strong> ${bike.specs.material === 'Carbon' ? 'Carbon' : 'Alloy'} ${Math.floor(Math.random() * 5) + 25}"</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Description</h3>
+                <p>The ${bike.year} ${bike.manufacturer} ${bike.model} is a high-performance ${bike.type.toLowerCase()} bike designed for riders who demand the best. With its ${bike.specs.material.toLowerCase()} frame, it offers an exceptional balance of stiffness and comfort, making it ideal for long rides and challenging terrains.</p>
+                <p>Featuring a ${Math.random() > 0.5 ? 'Shimano' : 'SRAM'} ${Math.random() > 0.7 ? 'Ultegra' : Math.random() > 0.5 ? 'Dura-Ace' : '105'} groupset with ${bike.specs.gears} speeds, this bike delivers smooth and precise shifting. The ${Math.random() > 0.5 ? 'hydraulic' : 'mechanical'} disc brakes provide confident stopping power in all conditions.</p>
+                
+                <h3 class="section-title">Similar Bikes You Might Like</h3>
+                <div class="similar-bikes">
+                    ${similarBikes.map(similarBike => {
+                        const simImageUrl = BIKE_IMAGES[similarBike.type.toLowerCase()] || BIKE_IMAGES.default;
+                        return `
+                            <div class="similar-bike-card" onclick="showBikeDetails(${JSON.stringify(similarBike).replace(/"/g, '&quot;')})">
+                                <div style="height: 100px; display: flex; justify-content: center; align-items: center; padding: 0.5rem;">
+                                    <img src="${simImageUrl}" alt="${similarBike.manufacturer} ${similarBike.model}" style="max-height: 100%; max-width: 100%;">
+                                </div>
+                                <div style="padding: 0.5rem;">
+                                    <div style="font-size: 0.8rem; color: var(--accent);">${similarBike.year}</div>
+                                    <div style="font-weight: 600; font-size: 0.9rem;">${similarBike.manufacturer} ${similarBike.model}</div>
+                                    <div style="color: var(--danger); font-weight: 600; font-size: 0.9rem; margin-top: 0.3rem;">$${similarBike.price.toLocaleString()}</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <button class="btn" style="margin-top: 2rem;">Add to Cart</button>
+            `;
+            
+            // Show modal
+            bikeModal.style.display = 'block';
+        }
+        
+        // Get similar bikes
+        function getSimilarBikes(targetBike) {
+            return recommendedBikes
+                .filter(bike => bike !== targetBike)
+                .sort((a, b) => {
+                    // Sort by similarity (same type is most important)
+                    if (a.type === targetBike.type && b.type !== targetBike.type) return -1;
+                    if (a.type !== targetBike.type && b.type === targetBike.type) return 1;
+                    
+                    // Then by manufacturer
+                    if (a.manufacturer === targetBike.manufacturer && b.manufacturer !== targetBike.manufacturer) return -1;
+                    if (a.manufacturer !== targetBike.manufacturer && b.manufacturer === targetBike.manufacturer) return 1;
+                    
+                    // Then by price similarity
+                    return Math.abs(a.price - targetBike.price) - Math.abs(b.price - targetBike.price);
+                })
+                .slice(0, 5); // Get top 5 similar bikes
+        }
+        
+        // Mock manufacturers for fallback
+        const mockManufacturers = ['Trek', 'Specialized', 'Giant', 'Cannondale', 'Fuji', 'Bianchi', 'Cervelo', 'Scott', 'Santa Cruz', 'Surly'];
+    </script>
+</body>
+</html>
