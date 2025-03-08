@@ -31,13 +31,37 @@
             background-color: var(--light);
             color: var(--text-dark);
             line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         
         header {
-            background: linear-gradient(to right, var(--secondary), var(--dark));
+            background: var(--dark);
             color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1.2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            background-image: linear-gradient(to right, var(--dark), #1a3a5f);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: 0;
         }
         
         .header-content {
@@ -46,18 +70,23 @@
             padding: 0 1rem;
             display: flex;
             flex-direction: column;
+            position: relative;
+            z-index: 1;
         }
         
         h1 {
             margin-bottom: 0.3rem;
             font-size: 2.2rem;
             font-weight: 700;
+            color: var(--primary);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
         
         .subtitle {
             font-weight: 300;
             opacity: 0.9;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            color: #fff;
         }
         
         .container {
@@ -69,35 +98,56 @@
         .card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             padding: 1.5rem;
             margin-bottom: 2rem;
             border: 1px solid #E3E3E3;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/2972/2972185.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.05;
+            z-index: 0;
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
         }
         
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            color: var(--secondary);
         }
         
         select, input {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.8rem;
             border: 1px solid var(--gray);
             border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
         }
         
         select:focus, input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(72, 163, 255, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.2);
             outline: none;
         }
         
@@ -110,9 +160,9 @@
         .slider {
             -webkit-appearance: none;
             width: 100%;
-            height: 6px;
+            height: 8px;
             border-radius: 5px;  
-            background: var(--gray);
+            background: var(--gray-light);
             outline: none;
         }
         
@@ -125,11 +175,11 @@
             background: var(--primary);
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.1s;
+            transition: transform 0.2s;
         }
         
         .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
         
         .slider::-moz-range-thumb {
@@ -139,12 +189,12 @@
             background: var(--primary);
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.1s;
+            transition: transform 0.2s;
             border: none;
         }
         
         .slider::-moz-range-thumb:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
         
         .slider-value {
@@ -152,33 +202,36 @@
             font-weight: 600;
             margin-top: 0.5rem;
             color: var(--primary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .btn {
-            background-color: var(--primary);
+            background: linear-gradient(to bottom, var(--warning), #e6c200);
             color: var(--text-dark);
-            border: none;
-            padding: 0.85rem 1.7rem;
-            border-radius: 30px;
+            border: 1px solid #c7a61a;
+            padding: 0.9rem 1.8rem;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
-            transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: block;
-            margin: 1.5rem auto 0.5rem;
-            min-width: 200px;
+            margin: 1.8rem auto 0.5rem;
+            min-width: 220px;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
+            background: linear-gradient(to bottom, #ffce29, #e6c200);
+            transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
         .btn:active {
             transform: translateY(1px);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
         }
         
         .btn:disabled {
@@ -197,20 +250,21 @@
         .bike-card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             overflow: hidden;
             transition: all 0.3s;
             cursor: pointer;
             border: 1px solid #E3E3E3;
+            position: relative;
         }
         
         .bike-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
         
         .bike-image {
-            height: 200px;
+            height: 220px;
             background-color: white;
             display: flex;
             align-items: center;
@@ -218,16 +272,34 @@
             padding: 1rem;
             border-bottom: 1px solid var(--gray-light);
             position: relative;
+            overflow: hidden;
+        }
+        
+        .bike-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, rgba(255,255,255,0.8), transparent);
+            z-index: 1;
         }
         
         .bike-image img {
             max-width: 100%;
             max-height: 180px;
             object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .bike-card:hover .bike-image img {
+            transform: scale(1.05);
         }
         
         .bike-details {
             padding: 1.2rem;
+            background: linear-gradient(to bottom, white, #f9f9f9);
         }
         
         .bike-name {
@@ -255,6 +327,7 @@
             justify-content: space-between;
             border-top: 1px solid var(--gray-light);
             padding-top: 1rem;
+            margin-top: 0.5rem;
         }
         
         .bike-spec span {
@@ -262,7 +335,7 @@
         }
         
         .spec-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #717171;
         }
         
@@ -275,13 +348,13 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: var(--success);
+            background: linear-gradient(to bottom, var(--success), #2d9e3e);
             color: white;
             padding: 0.4rem 0.7rem;
-            border-radius: 20px;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 0.85rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
             z-index: 2;
         }
         
@@ -289,28 +362,33 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background-color: var(--primary);
-            color: var(--text-dark);
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            color: white;
             padding: 0.3rem 0.6rem;
             border-radius: 3px;
             font-weight: 600;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             z-index: 2;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .loading {
             text-align: center;
-            margin: 2rem 0;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         .spinner {
-            border: 3px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border-left-color: var(--primary);
             animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
         }
         
         @keyframes spin {
@@ -319,35 +397,58 @@
         }
         
         .preferences-summary {
-            background-color: rgba(255, 217, 20, 0.1);
-            border-left: 4px solid var(--warning);
-            padding: 1rem 1.5rem;
+            background: linear-gradient(to right, #fff, #f8f8f8);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem 1.5rem;
             margin-bottom: 2rem;
-            border-radius: 4px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
         
         .preferences-summary h3 {
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .preferences-summary h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
         }
         
         .preferences-summary ul {
             list-style-type: none;
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.8rem;
         }
         
         .preferences-summary li {
-            background-color: rgba(255, 217, 20, 0.2);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
+            background-color: white;
+            padding: 0.5rem 0.9rem;
+            border-radius: 5px;
             font-size: 0.9rem;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        
+        .preferences-summary li:hover {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
         
         .error {
             color: var(--danger);
             margin-top: 0.5rem;
+            font-weight: 500;
         }
         
         .modal {
@@ -360,6 +461,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             overflow-y: auto;
+            backdrop-filter: blur(5px);
         }
         
         .modal-content {
@@ -367,19 +469,26 @@
             margin: 5% auto;
             padding: 2rem;
             border-radius: 8px;
-            max-width: 800px;
+            max-width: 850px;
             position: relative;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .close-modal {
             position: absolute;
             top: 15px;
             right: 20px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             cursor: pointer;
             color: #aaa;
             transition: color 0.2s;
+            z-index: 10;
         }
         
         .close-modal:hover {
@@ -387,11 +496,11 @@
         }
         
         .section-title {
-            color: var(--dark);
-            margin: 1.5rem 0 0.5rem;
+            color: var(--secondary);
+            margin: 1.8rem 0 0.8rem;
             font-size: 1.3rem;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.6rem;
         }
         
         .section-title:after {
@@ -401,20 +510,21 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            border-radius: 2px;
         }
         
         .similar-bikes {
             display: flex;
             overflow-x: auto;
-            gap: 1rem;
-            padding: 1rem 0;
+            gap: 1.2rem;
+            padding: 1.2rem 0;
             scrollbar-width: thin;
             scrollbar-color: var(--primary) var(--gray-light);
         }
         
         .similar-bikes::-webkit-scrollbar {
-            height: 6px;
+            height: 8px;
         }
         
         .similar-bikes::-webkit-scrollbar-track {
@@ -423,30 +533,30 @@
         }
         
         .similar-bikes::-webkit-scrollbar-thumb {
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             border-radius: 10px;
         }
         
         .similar-bike-card {
-            min-width: 200px;
+            min-width: 220px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             overflow: hidden;
             border: 1px solid var(--gray-light);
-            transition: transform 0.2s;
+            transition: all 0.3s;
         }
         
         .similar-bike-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
         }
         
         .toggle-container {
             position: relative;
             display: inline-block;
             width: 60px;
-            height: 38px;
+            height: 35px;
             vertical-align: middle;
             margin-left: 10px;
         }
@@ -479,10 +589,11 @@
             background-color: white;
             transition: .4s;
             border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
         .toggle-checkbox:checked + .toggle-label {
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
         }
         
         .toggle-checkbox:checked + .toggle-label:before {
@@ -493,13 +604,38 @@
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--danger);
-            margin: 0.5rem 0;
+            margin: 0.7rem 0;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .price-tag::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, var(--danger), transparent);
         }
         
         .rating {
             color: var(--primary);
             font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rating::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/1828/1828884.png');
+            background-size: contain;
+            margin-right: 5px;
+            opacity: 0.9;
         }
         
         .filters-header {
@@ -507,20 +643,135 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-light);
+            padding-bottom: 1rem;
+            position: relative;
+        }
+        
+        .filters-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
         }
         
         .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-light);
+            padding-bottom: 1rem;
+            position: relative;
+        }
+        
+        .results-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
         }
         
         .sort-select {
             width: auto;
-            padding: 0.5rem;
+            padding: 0.5rem 2rem 0.5rem 0.8rem;
             margin-left: 0.5rem;
             font-size: 0.9rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            appearance: none;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/32/32195.png');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 12px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 0.7rem;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+        }
+        
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .radio-option label {
+            display: inline;
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .radio-option:hover label {
+            color: var(--primary);
+        }
+        
+        .radio-option::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .radio-option:hover::before {
+            border-color: var(--primary);
+        }
+        
+        .radio-option input:checked ~ label {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .radio-option input:checked ~ ::before {
+            border-color: var(--primary);
+            border-width: 2px;
+        }
+        
+        .radio-option::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .radio-option input:checked ~ ::after {
+            opacity: 1;
         }
         
         @media (max-width: 768px) {
@@ -546,7 +797,15 @@
             .results-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.5rem;
+                gap: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                width: 100%;
             }
         }
     </style>
@@ -612,6 +871,24 @@
                     </select>
                 </div>
                 
+                <div class="form-group">
+                    <label>Gender Preference</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="gender-male" name="gender" value="male">
+                            <label for="gender-male">Male</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="gender-female" name="gender" value="female">
+                            <label for="gender-female">Female</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="gender-any" name="gender" value="" checked>
+                            <label for="gender-any">No Preference</label>
+                        </div>
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn" id="find-bikes-btn">Find My Perfect Bike</button>
             </form>
         </div>
@@ -663,12 +940,12 @@
         // Constants
         const BIKEBOOK_API = 'https://bikebook.io';
         const BIKE_IMAGES = {
-            'road': '/api/placeholder/400/300?text=Road+Bike',
-            'mountain': '/api/placeholder/400/300?text=Mountain+Bike',
-            'hybrid': '/api/placeholder/400/300?text=Hybrid+Bike',
-            'commuter': '/api/placeholder/400/300?text=Commuter+Bike',
-            'touring': '/api/placeholder/400/300?text=Touring+Bike',
-            'default': '/api/placeholder/400/300?text=Bike+Image'
+            'road': 'https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'mountain': 'https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'hybrid': 'https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'commuter': 'https://images.unsplash.com/photo-1529422643029-d4585747aaf2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'touring': 'https://images.unsplash.com/photo-1571333250630-f0230c320b6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+            'default': 'https://images.unsplash.com/photo-1511994298241-608e28f14fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
         };
         
         // Prices for mock data
@@ -755,6 +1032,7 @@
             } catch (error) {
                 console.error('Error fetching manufacturers:', error);
                 // Use mock data if API fails
+                const mockManufacturers = ['Trek', 'Specialized', 'Giant', 'Cannondale', 'Fuji', 'Bianchi', 'Cervelo', 'Scott', 'Santa Cruz', 'Surly'];
                 mockManufacturers.forEach(manufacturer => {
                     const option = document.createElement('option');
                     option.value = manufacturer;
@@ -773,7 +1051,8 @@
                 manufacturer: manufacturerSelect.value,
                 year: anyYearCheckbox.checked ? "" : yearSlider.value,
                 bikeType: bikeTypeSelect.value,
-                priceRange: priceRangeSelect.value
+                priceRange: priceRangeSelect.value,
+                gender: document.querySelector('input[name="gender"]:checked').value
             };
             
             // Reset recommended bikes
@@ -826,6 +1105,12 @@
                 summaryHTML += `<li><strong>Price:</strong> Any</li>`;
             }
             
+            if (userPreferences.gender) {
+                summaryHTML += `<li><strong>Gender:</strong> ${userPreferences.gender.charAt(0).toUpperCase() + userPreferences.gender.slice(1)}</li>`;
+            } else {
+                summaryHTML += `<li><strong>Gender:</strong> No Preference</li>`;
+            }
+            
             summaryHTML += '</ul>';
             preferencesSummary.innerHTML = summaryHTML;
         }
@@ -845,221 +1130,330 @@
                     const models = await response.json();
                     
                     // Get detailed information for each model
-                    await getDetailedBikeInfo(models);
-                } else {
-                    // If no manufacturer selected, use a few popular ones
-                    const popularManufacturers = ['Trek', 'Specialized', 'Giant', 'Cannondale', 'Fuji'];
-                    
-                    // Use whatever manufacturers we have if the API call failed earlier
-                    const manufacturersToUse = manufacturers.length > 0 ? 
-                        popularManufacturers.filter(m => manufacturers.includes(m)) : 
-                        mockManufacturers;
-                    
-                    for (const manufacturer of manufacturersToUse.slice(0, 3)) {
-                        let url = `${BIKEBOOK_API}/model_list?manufacturer=${encodeURIComponent(manufacturer)}`;
-                        
+                    // Process models and create recommendations
+                    for (const model of models.slice(0, 20)) { // Limit to 20 models for performance
                         try {
-                            const response = await fetch(url);
-                            if (response.ok) {
-                                const models = await response.json();
-                                await getDetailedBikeInfo(models, manufacturer);
+                            const modelUrl = `${BIKEBOOK_API}/model_detail?manufacturer=${encodeURIComponent(userPreferences.manufacturer)}&model=${encodeURIComponent(model)}`;
+                            const modelResponse = await fetch(modelUrl);
+                            
+                            if (!modelResponse.ok) {
+                                continue;
                             }
+                            
+                            const modelData = await modelResponse.json();
+                            
+                            // Filter by year if specified
+                            if (userPreferences.year && modelData.year !== parseInt(userPreferences.year)) {
+                                continue;
+                            }
+                            
+                            // Create bike object
+                            const bike = {
+                                id: Math.random().toString(36).substr(2, 9),
+                                name: model,
+                                manufacturer: userPreferences.manufacturer,
+                                year: modelData.year || 2023,
+                                type: modelData.type || getRandomBikeType(),
+                                price: getRandomPrice(userPreferences.priceRange),
+                                specs: {
+                                    weight: Math.floor(Math.random() * 10) + 5 + " kg",
+                                    material: getRandomMaterial(),
+                                    gears: Math.floor(Math.random() * 24) + 1
+                                },
+                                matchScore: calculateMatchScore(modelData),
+                                image: getBikeImage(modelData.type),
+                                gender: modelData.gender || getRandomGender(),
+                                freeShipping: Math.random() > 0.5
+                            };
+                            
+                            // Filter by bike type if specified
+                            if (userPreferences.bikeType && bike.type !== userPreferences.bikeType) {
+                                continue;
+                            }
+                            
+                            // Filter by gender if specified
+                            if (userPreferences.gender && bike.gender !== userPreferences.gender && bike.gender !== 'unisex') {
+                                continue;
+                            }
+                            
+                            recommendedBikes.push(bike);
                         } catch (error) {
-                            console.error(`Error fetching models for ${manufacturer}:`, error);
-                            // Use mock data
-                            await processMockBikeData(manufacturer);
+                            console.error(`Error processing model ${model}:`, error);
                         }
                     }
+                } else {
+                    // If no manufacturer selected, generate random recommendations
+                    generateRandomRecommendations();
                 }
                 
-                // Hide loading spinner
-                loadingElement.style.display = 'none';
+                // If no bikes found, generate random recommendations
+                if (recommendedBikes.length === 0) {
+                    generateRandomRecommendations();
+                }
                 
-                // Sort bikes by match score (default)
+                // Sort bikes by match score
                 sortBikes();
                 
-                // Display results
-                displayRecommendations();
+                // Hide loading spinner and display bikes
+                loadingElement.style.display = 'none';
+                displayBikes();
+                
             } catch (error) {
                 console.error('Error getting bike recommendations:', error);
-                loadingElement.style.display = 'none';
-                
-                // Use mock data if API fails
-                processMockBikeData(userPreferences.manufacturer || 'Trek');
+                // Generate random recommendations if API fails
+                generateRandomRecommendations();
                 sortBikes();
-                displayRecommendations();
+                loadingElement.style.display = 'none';
+                displayBikes();
             }
         }
         
-        // Get detailed information for each bike model
-        async function getDetailedBikeInfo(models, manufacturer = userPreferences.manufacturer) {
-            const year = userPreferences.year || new Date().getFullYear();
-            const bikeType = userPreferences.bikeType;
+        // Generate random bike recommendations
+        function generateRandomRecommendations() {
+            const mockManufacturers = [
+                'Trek', 'Specialized', 'Giant', 'Cannondale', 'Scott', 
+                'Santa Cruz', 'Cervélo', 'Bianchi', 'Kona', 'Orbea',
+                'Pinarello', 'BMC', 'Felt', 'GT', 'Marin'
+            ];
             
-            // Limit to 10 models to avoid too many API calls
-            const limitedModels = models.slice(0, 10);
+            const mockModels = [
+                'Domane', 'Emonda', 'Madone', 'Checkpoint', 'Fuel EX',
+                'Tarmac', 'Roubaix', 'Diverge', 'Epic', 'Stumpjumper',
+                'Defy', 'TCR', 'Propel', 'Revolt', 'Anthem',
+                'SuperSix', 'Synapse', 'CAAD', 'Topstone', 'Scalpel',
+                'Addict', 'Spark', 'Scale', 'Genius', 'Contessa'
+            ];
             
-            for (const model of limitedModels) {
-                try {
-                    const url = `${BIKEBOOK_API}?manufacturer=${encodeURIComponent(manufacturer)}&year=${year}&frame_model=${encodeURIComponent(model)}`;
-                    
-                    const response = await fetch(url);
-                    if (response.ok) {
-                        const bikeData = await response.json();
-                        
-                        // Add to recommended bikes if it matches the bike type filter
-                        // Continue from where the code was cut off
-                        if (!bikeType || (bikeData.type && bikeData.type.toLowerCase().includes(bikeType.toLowerCase()))) {
-                            // Calculate match score
-                            const matchScore = calculateMatchScore(bikeData);
-                            
-                            // Generate a random price based on the selected price range
-                            const price = generatePrice(userPreferences.priceRange);
-                            
-                            // Add bike to recommendations with match score
-                            recommendedBikes.push({
-                                manufacturer: manufacturer,
-                                model: model,
-                                year: bikeData.year || year,
-                                type: bikeData.type || 'Road',
-                                specs: bikeData,
-                                matchScore: matchScore,
-                                price: price,
-                                freeShipping: Math.random() > 0.5 // 50% chance of free shipping
-                            });
-                        }
-                    }
-                } catch (error) {
-                    console.error(`Error fetching details for ${model}:`, error);
-                }
+            // Generate 15 random bikes
+            for (let i = 0; i < 15; i++) {
+                const manufacturer = userPreferences.manufacturer || mockManufacturers[Math.floor(Math.random() * mockManufacturers.length)];
+                const bikeType = userPreferences.bikeType || getRandomBikeType();
+                const year = userPreferences.year || Math.floor(Math.random() * 10) + 2015;
+                const gender = userPreferences.gender || getRandomGender();
+                
+                const bike = {
+                    id: Math.random().toString(36).substr(2, 9),
+                    name: mockModels[Math.floor(Math.random() * mockModels.length)],
+                    manufacturer: manufacturer,
+                    year: parseInt(year),
+                    type: bikeType,
+                    price: getRandomPrice(userPreferences.priceRange),
+                    specs: {
+                        weight: Math.floor(Math.random() * 10) + 5 + " kg",
+                        material: getRandomMaterial(),
+                        gears: Math.floor(Math.random() * 24) + 1
+                    },
+                    matchScore: Math.floor(Math.random() * 30) + 70,
+                    image: getBikeImage(bikeType),
+                    gender: gender,
+                    freeShipping: Math.random() > 0.5
+                };
+                
+                recommendedBikes.push(bike);
             }
         }
         
         // Calculate match score based on user preferences
         function calculateMatchScore(bikeData) {
-            let score = 75; // Base score
+            let score = 70; // Base score
             
-            // Add points for exact manufacturer match
-            if (userPreferences.manufacturer && bikeData.manufacturer === userPreferences.manufacturer) {
+            // Add points for matching preferences
+            if (userPreferences.bikeType && bikeData.type === userPreferences.bikeType) {
                 score += 10;
             }
             
-            // Add points for year match (or close)
-            if (userPreferences.year) {
-                const yearDiff = Math.abs(parseInt(bikeData.year) - parseInt(userPreferences.year));
-                if (yearDiff === 0) {
-                    score += 10;
-                } else if (yearDiff <= 2) {
-                    score += 5;
-                }
-            }
-            
-            // Add points for bike type match
-            if (userPreferences.bikeType && bikeData.type && bikeData.type.toLowerCase().includes(userPreferences.bikeType.toLowerCase())) {
+            if (userPreferences.year && bikeData.year === parseInt(userPreferences.year)) {
                 score += 10;
             }
             
-            // Random variation to avoid all bikes having the same score
-            score += (Math.random() * 5) - 2.5;
-            
-            // Ensure score is between 0 and 100
-            return Math.min(99, Math.max(70, Math.round(score)));
-        }
-        
-        // Generate a price based on the selected price range
-        function generatePrice(priceRange) {
-            if (!priceRange) {
-                // If no price range selected, generate a price between $300 and $5000
-                return Math.floor(Math.random() * 4700) + 300;
+            if (userPreferences.gender && (bikeData.gender === userPreferences.gender || bikeData.gender === 'unisex')) {
+                score += 10;
             }
             
-            const range = PRICE_RANGES[priceRange];
-            return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+            // Add some randomness
+            score += Math.floor(Math.random() * 10);
+            
+            // Cap at 100
+            return Math.min(score, 100);
         }
         
-        // Process mock bike data when API fails
-        function processMockBikeData(manufacturer) {
-            const bikeTypes = ['road', 'mountain', 'hybrid', 'commuter', 'touring'];
-            const modelPrefixes = {
-                'Trek': ['Domane', 'Madone', 'Émonda', 'Fuel EX', 'Marlin', 'FX', 'Verve', '520'],
-                'Specialized': ['Tarmac', 'Roubaix', 'Stumpjumper', 'Rockhopper', 'Sirrus', 'Diverge', 'AWOL'],
-                'Giant': ['Defy', 'TCR', 'Contend', 'Talon', 'Fathom', 'Escape', 'FastRoad', 'Revolt'],
-                'Cannondale': ['SuperSix', 'CAAD', 'Synapse', 'Scalpel', 'Trail', 'Quick', 'Topstone', 'Touring'],
-                'Fuji': ['Roubaix', 'SL', 'Nevada', 'Tahoe', 'Absolute', 'Touring', 'Jari'],
-                'default': ['Model A', 'Model B', 'Model C', 'Model D', 'Model E', 'Model F', 'Model G']
-            };
-            
-            const prefixes = modelPrefixes[manufacturer] || modelPrefixes.default;
-            const year = userPreferences.year || (Math.floor(Math.random() * 6) + 2020); // Random year between 2020-2025
-            const targetType = userPreferences.bikeType || bikeTypes[Math.floor(Math.random() * bikeTypes.length)];
-            
-            // Generate 6-10 random bikes
-            const numBikes = Math.floor(Math.random() * 5) + 6;
-            
-            for (let i = 0; i < numBikes; i++) {
-                const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-                const modelNumber = Math.floor(Math.random() * 9) + 1;
-                const model = `${prefix} ${modelNumber}00`;
-                
-                // Determine bike type based on model prefix or user preference
-                let type;
-                if (targetType) {
-                    type = targetType;
-                } else {
-                    // Assign a bike type based on the model prefix
-                    if (prefix.includes('Domane') || prefix.includes('Tarmac') || prefix.includes('Roubaix') || prefix.includes('TCR')) {
-                        type = 'road';
-                    } else if (prefix.includes('Fuel') || prefix.includes('Stumpjumper') || prefix.includes('Talon')) {
-                        type = 'mountain';
-                    } else if (prefix.includes('FX') || prefix.includes('Sirrus') || prefix.includes('Escape')) {
-                        type = 'hybrid';
-                    } else if (prefix.includes('Verve') || prefix.includes('Quick') || prefix.includes('FastRoad')) {
-                        type = 'commuter';
-                    } else if (prefix.includes('520') || prefix.includes('AWOL') || prefix.includes('Touring')) {
-                        type = 'touring';
-                    } else {
-                        type = bikeTypes[Math.floor(Math.random() * bikeTypes.length)];
-                    }
-                }
-                
-                // Calculate match score
-                let matchScore = 75;
-                if (userPreferences.manufacturer && manufacturer === userPreferences.manufacturer) {
-                    matchScore += 10;
-                }
-                if (userPreferences.year && year == userPreferences.year) {
-                    matchScore += 10;
-                }
-                if (userPreferences.bikeType && type === userPreferences.bikeType) {
-                    matchScore += 10;
-                }
-                
-                // Add random variation
-                matchScore += (Math.random() * 5) - 2.5;
-                matchScore = Math.min(99, Math.max(70, Math.round(matchScore)));
-                
-                // Generate price
-                const price = generatePrice(userPreferences.priceRange);
-                
-                // Add bike to recommendations
-                recommendedBikes.push({
-                    manufacturer: manufacturer,
-                    model: model,
-                    year: year,
-                    type: type,
-                    specs: {
-                        weight: (Math.random() * 6 + 7).toFixed(1) + ' kg',
-                        material: Math.random() > 0.7 ? 'Carbon' : 'Aluminum',
-                        gears: Math.floor(Math.random() * 12) + 9
-                    },
-                    matchScore: matchScore,
-                    price: price,
-                    freeShipping: Math.random() > 0.5
-                });
+        // Get random bike type
+        function getRandomBikeType() {
+            const types = ['road', 'mountain', 'hybrid', 'commuter', 'touring'];
+            return types[Math.floor(Math.random() * types.length)];
+        }
+        
+        // Get random gender
+        function getRandomGender() {
+            const genders = ['male', 'female', 'unisex'];
+            return genders[Math.floor(Math.random() * genders.length)];
+        }
+        
+        // Get random frame material
+        function getRandomMaterial() {
+            const materials = ['Carbon', 'Aluminum', 'Steel', 'Titanium'];
+            return materials[Math.floor(Math.random() * materials.length)];
+        }
+        
+        // Get random price based on price range
+        function getRandomPrice(priceRange) {
+            if (priceRange && PRICE_RANGES[priceRange]) {
+                const range = PRICE_RANGES[priceRange];
+                return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
             }
+            
+            // Default price range if none specified
+            return Math.floor(Math.random() * 3000) + 300;
         }
         
-        // Sort bikes based on selected criteria
+        // Get bike image based on type
+        function getBikeImage(type) {
+            if (type && BIKE_IMAGES[type]) {
+                return BIKE_IMAGES[type];
+            }
+            return BIKE_IMAGES.default;
+        }
+        
+        // Display bikes in the bike list
+        function displayBikes() {
+            bikeList.innerHTML = '';
+            
+            if (recommendedBikes.length === 0) {
+                bikeList.innerHTML = '<p>No bikes found matching your criteria. Please try different preferences.</p>';
+                return;
+            }
+            
+            recommendedBikes.forEach(bike => {
+                const bikeCard = document.createElement('div');
+                bikeCard.className = 'bike-card';
+                bikeCard.dataset.bikeId = bike.id;
+                
+                bikeCard.innerHTML = `
+                    <div class="bike-image">
+                        <img src="${bike.image}" alt="${bike.manufacturer} ${bike.name}">
+                        <div class="match-score">${bike.matchScore}% Match</div>
+                        ${bike.freeShipping ? '<div class="free-shipping">Free Shipping</div>' : ''}
+                    </div>
+                    <div class="bike-details">
+                        <div class="bike-year">${bike.year}</div>
+                        <div class="bike-name">${bike.name}</div>
+                        <div class="bike-manufacturer">${bike.manufacturer}</div>
+                        <div class="price-tag">$${bike.price.toLocaleString()}</div>
+                        <div class="rating">★★★★☆ (${Math.floor(Math.random() * 100) + 10})</div>
+                        <div class="bike-spec">
+                            <div>
+                                <span class="spec-label">Weight</span>
+                                <span class="spec-value">${bike.specs.weight}</span>
+                            </div>
+                            <div>
+                                <span class="spec-label">Material</span>
+                                <span class="spec-value">${bike.specs.material}</span>
+                            </div>
+                            <div>
+                                <span class="spec-label">Gears</span>
+                                <span class="spec-value">${bike.specs.gears}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                bikeCard.addEventListener('click', () => showBikeDetails(bike));
+                bikeList.appendChild(bikeCard);
+            });
+        }
+        
+        // Show bike details in modal
+        function showBikeDetails(bike) {
+            modalContent.innerHTML = `
+                <h2>${bike.year} ${bike.manufacturer} ${bike.name}</h2>
+                <div class="price-tag">$${bike.price.toLocaleString()}</div>
+                <div class="rating">★★★★☆ (${Math.floor(Math.random() * 100) + 10} reviews)</div>
+                
+                <div style="display: flex; margin: 1.5rem 0; gap: 2rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="${bike.image}" alt="${bike.manufacturer} ${bike.name}" style="max-width: 100%; border: 1px solid #ddd; padding: 1rem;">
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 class="section-title">Specifications</h3>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Brand</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.manufacturer}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Model</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.name}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Year</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.year}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Type</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.type.charAt(0).toUpperCase() + bike.type.slice(1)}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Gender</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.gender.charAt(0).toUpperCase() + bike.gender.slice(1)}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Weight</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.specs.weight}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Frame Material</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.specs.material}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Gears</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.specs.gears}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee; font-weight: 600;">Shipping</td>
+                                <td style="padding: 0.5rem; border-bottom: 1px solid #eee;">${bike.freeShipping ? 'Free' : '$49.99'}</td>
+                            </tr>
+                        </table>
+                        
+                        <button class="btn" style="margin-top: 1.5rem; width: 100%;">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Similar Bikes</h3>
+                <div class="similar-bikes">
+                    ${getSimilarBikes(bike)}
+                </div>
+            `;
+            
+            bikeModal.style.display = 'block';
+        }
+        
+        // Get similar bikes HTML
+        function getSimilarBikes(currentBike) {
+            // Filter bikes of same type but different models
+            const similar = recommendedBikes
+                .filter(bike => bike.type === currentBike.type && bike.id !== currentBike.id)
+                .slice(0, 5);
+                
+            if (similar.length === 0) {
+                return '<p>No similar bikes found.</p>';
+            }
+            
+            return similar.map(bike => `
+                <div class="similar-bike-card" data-bike-id="${bike.id}">
+                    <div style="height: 120px; display: flex; align-items: center; justify-content: center; padding: 0.5rem; border-bottom: 1px solid #eee;">
+                        <img src="${bike.image}" alt="${bike.name}" style="max-height: 100px; max-width: 100%;">
+                    </div>
+                    <div style="padding: 0.5rem;">
+                        <div style="font-size: 0.8rem; color: #666;">${bike.year}</div>
+                        <div style="font-weight: 600; font-size: 0.9rem;">${bike.name}</div>
+                        <div style="font-size: 0.8rem;">${bike.manufacturer}</div>
+                        <div style="color: var(--danger); font-weight: 600; margin-top: 0.3rem;">$${bike.price.toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Sort bikes based on selected sort option
         function sortBikes() {
             const sortBy = sortBySelect.value;
             
@@ -1080,167 +1474,11 @@
                     recommendedBikes.sort((a, b) => b.matchScore - a.matchScore);
             }
             
-            // Redisplay the bikes
+            // Re-display bikes with new sort order
             if (bikeList.innerHTML !== '') {
-                displayRecommendations();
+                displayBikes();
             }
         }
-        
-        // Display bike recommendations
-        function displayRecommendations() {
-            // Clear previous results
-            bikeList.innerHTML = '';
-            
-            // If no bikes found
-            if (recommendedBikes.length === 0) {
-                bikeList.innerHTML = `
-                    <div class="card" style="text-align: center; padding: 2rem;">
-                        <h3>No bikes found matching your criteria</h3>
-                        <p>Try adjusting your preferences for more results.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Display each bike
-            recommendedBikes.forEach(bike => {
-                // Get image based on bike type
-                const imageUrl = BIKE_IMAGES[bike.type.toLowerCase()] || BIKE_IMAGES.default;
-                
-                // Create bike card element
-                const bikeCard = document.createElement('div');
-                bikeCard.className = 'bike-card';
-                bikeCard.onclick = () => showBikeDetails(bike);
-                
-                // Generate star rating
-                const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
-                const stars = '★'.repeat(Math.floor(rating)) + (rating % 1 > 0 ? '☆' : '') + '☆'.repeat(5 - Math.ceil(rating));
-                
-                bikeCard.innerHTML = `
-                    <div class="bike-image">
-                        <div class="match-score">${bike.matchScore}% Match</div>
-                        ${bike.freeShipping ? '<div class="free-shipping">Free Shipping</div>' : ''}
-                        <img src="${imageUrl}" alt="${bike.manufacturer} ${bike.model}">
-                    </div>
-                    <div class="bike-details">
-                        <div class="bike-year">${bike.year}</div>
-                        <div class="bike-name">${bike.manufacturer} ${bike.model}</div>
-                        <div class="bike-manufacturer">${bike.type} Bike</div>
-                        <div class="price-tag">$${bike.price.toLocaleString()}</div>
-                        <div class="rating">${stars} ${rating}</div>
-                        <div class="bike-spec">
-                            <div>
-                                <span class="spec-label">Weight</span>
-                                <span class="spec-value">${bike.specs.weight || '9.2 kg'}</span>
-                            </div>
-                            <div>
-                                <span class="spec-label">Material</span>
-                                <span class="spec-value">${bike.specs.material || 'Carbon'}</span>
-                            </div>
-                            <div>
-                                <span class="spec-label">Gears</span>
-                                <span class="spec-value">${bike.specs.gears || '11'}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                bikeList.appendChild(bikeCard);
-            });
-        }
-        
-        // Show bike details in modal
-        function showBikeDetails(bike) {
-            // Get image based on bike type
-            const imageUrl = BIKE_IMAGES[bike.type.toLowerCase()] || BIKE_IMAGES.default;
-            
-            // Generate star rating
-            const rating = (Math.random() * 1.5 + 3.5).toFixed(1);
-            const stars = '★'.repeat(Math.floor(rating)) + (rating % 1 > 0 ? '☆' : '') + '☆'.repeat(5 - Math.ceil(rating));
-            
-            // Get similar bikes
-            const similarBikes = getSimilarBikes(bike);
-            
-            // Create modal content
-            modalContent.innerHTML = `
-                <h2>${bike.manufacturer} ${bike.model} (${bike.year})</h2>
-                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0;">
-                    <div style="flex: 1; min-width: 300px;">
-                        <div style="position: relative;">
-                            <img src="${imageUrl}" alt="${bike.manufacturer} ${bike.model}" style="width: 100%; border-radius: 8px;">
-                            ${bike.freeShipping ? '<div class="free-shipping" style="position: absolute; top: 10px; left: 10px;">Free Shipping</div>' : ''}
-                        </div>
-                        <div class="rating" style="margin-top: 0.5rem; font-size: 1.1rem;">${stars} ${rating} (${Math.floor(Math.random() * 500) + 100} reviews)</div>
-                        <div class="price-tag" style="font-size: 1.8rem; margin: 0.5rem 0;">$${bike.price.toLocaleString()}</div>
-                    </div>
-                    <div style="flex: 1; min-width: 300px;">
-                        <div class="match-score" style="display: inline-block; margin-bottom: 1rem; font-size: 1rem;">${bike.matchScore}% Match with your preferences</div>
-                        <h3 class="section-title">Specifications</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Manufacturer:</strong> ${bike.manufacturer}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Model:</strong> ${bike.model}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Year:</strong> ${bike.year}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Type:</strong> ${bike.type} Bike</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Weight:</strong> ${bike.specs.weight || '9.2 kg'}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Frame Material:</strong> ${bike.specs.material || 'Carbon'}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Gears:</strong> ${bike.specs.gears || '11'}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Brakes:</strong> ${Math.random() > 0.5 ? 'Hydraulic Disc' : 'Mechanical Disc'}</li>
-                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-light);"><strong>Wheels:</strong> ${bike.specs.material === 'Carbon' ? 'Carbon' : 'Alloy'} ${Math.floor(Math.random() * 5) + 25}"</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <h3 class="section-title">Description</h3>
-                <p>The ${bike.year} ${bike.manufacturer} ${bike.model} is a high-performance ${bike.type.toLowerCase()} bike designed for riders who demand the best. With its ${bike.specs.material.toLowerCase()} frame, it offers an exceptional balance of stiffness and comfort, making it ideal for long rides and challenging terrains.</p>
-                <p>Featuring a ${Math.random() > 0.5 ? 'Shimano' : 'SRAM'} ${Math.random() > 0.7 ? 'Ultegra' : Math.random() > 0.5 ? 'Dura-Ace' : '105'} groupset with ${bike.specs.gears} speeds, this bike delivers smooth and precise shifting. The ${Math.random() > 0.5 ? 'hydraulic' : 'mechanical'} disc brakes provide confident stopping power in all conditions.</p>
-                
-                <h3 class="section-title">Similar Bikes You Might Like</h3>
-                <div class="similar-bikes">
-                    ${similarBikes.map(similarBike => {
-                        const simImageUrl = BIKE_IMAGES[similarBike.type.toLowerCase()] || BIKE_IMAGES.default;
-                        return `
-                            <div class="similar-bike-card" onclick="showBikeDetails(${JSON.stringify(similarBike).replace(/"/g, '&quot;')})">
-                                <div style="height: 100px; display: flex; justify-content: center; align-items: center; padding: 0.5rem;">
-                                    <img src="${simImageUrl}" alt="${similarBike.manufacturer} ${similarBike.model}" style="max-height: 100%; max-width: 100%;">
-                                </div>
-                                <div style="padding: 0.5rem;">
-                                    <div style="font-size: 0.8rem; color: var(--accent);">${similarBike.year}</div>
-                                    <div style="font-weight: 600; font-size: 0.9rem;">${similarBike.manufacturer} ${similarBike.model}</div>
-                                    <div style="color: var(--danger); font-weight: 600; font-size: 0.9rem; margin-top: 0.3rem;">$${similarBike.price.toLocaleString()}</div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-                
-                <button class="btn" style="margin-top: 2rem;">Add to Cart</button>
-            `;
-            
-            // Show modal
-            bikeModal.style.display = 'block';
-        }
-        
-        // Get similar bikes
-        function getSimilarBikes(targetBike) {
-            return recommendedBikes
-                .filter(bike => bike !== targetBike)
-                .sort((a, b) => {
-                    // Sort by similarity (same type is most important)
-                    if (a.type === targetBike.type && b.type !== targetBike.type) return -1;
-                    if (a.type !== targetBike.type && b.type === targetBike.type) return 1;
-                    
-                    // Then by manufacturer
-                    if (a.manufacturer === targetBike.manufacturer && b.manufacturer !== targetBike.manufacturer) return -1;
-                    if (a.manufacturer !== targetBike.manufacturer && b.manufacturer === targetBike.manufacturer) return 1;
-                    
-                    // Then by price similarity
-                    return Math.abs(a.price - targetBike.price) - Math.abs(b.price - targetBike.price);
-                })
-                .slice(0, 5); // Get top 5 similar bikes
-        }
-        
-        // Mock manufacturers for fallback
-        const mockManufacturers = ['Trek', 'Specialized', 'Giant', 'Cannondale', 'Fuji', 'Bianchi', 'Cervelo', 'Scott', 'Santa Cruz', 'Surly'];
     </script>
 </body>
 </html>
