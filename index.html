@@ -1164,113 +1164,113 @@
             <div class="progress-bar" id="progress-bar"></div>
         </div>
         
-        <header>
-            <div class="header-content">
-                <h1>BikeMatch</h1>
-                <p class="subtitle">Find your perfect ride with personalized recommendations</p>
-            </div>
-        </header>
-        
-        <div class="container">
-            <div class="card">
-                <div class="filters-header">
-                    <h2>Tell us your preferences</h2>
-                    <p>We'll find the perfect match for you</p>
-                </div>
-                
-                <form id="preferences-form">
-                    <div class="form-group">
-                        <label for="manufacturer">Preferred Manufacturer</label>
-                        <select id="manufacturer">
-                            <option value="">Any manufacturer</option>
-                            <!-- Will be populated by JavaScript -->
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="year-slider">Year: <span id="year-value">2023</span></label>
-                        <div class="slider-container">
-                            <input type="range" min="2000" max="2025" value="2023" class="slider" id="year-slider">
-                        </div>
-                        <div style="display: flex; align-items: center; margin-top: 0.5rem;">
-                            <label for="any-year" style="display: inline; margin-right: 0.5rem;">Any year</label>
-                            <div class="toggle-container">
-                                <input type="checkbox" id="any-year" class="toggle-checkbox" checked>
-                                <label for="any-year" class="toggle-label"></label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="bike-type">Bike Type</label>
-                        <select id="bike-type">
-                            <option value="">Any type</option>
-                            <option value="road">Road</option>
-                            <option value="mountain">Mountain</option>
-                            <option value="hybrid">Hybrid</option>
-                            <option value="commuter">Commuter</option>
-                            <option value="touring">Touring</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="price-range">Price Range</label>
-                        <select id="price-range">
-                            <option value="">Any price</option>
-                            <option value="budget">Budget (Under $500)</option>
-                            <option value="mid">Mid-range ($500-$1000)</option>
-                            <option value="premium">Premium ($1000-$2000)</option>
-                            <option value="high-end">High-end ($2000+)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Gender Preference</label>
-                        <div class="radio-group">
-                            <div class="radio-option">
-                                <input type="radio" id="gender-male" name="gender" value="male">
-                                <label for="gender-male">Male</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="gender-female" name="gender" value="female">
-                                <label for="gender-female">Female</label>
-                            </div>
-                            <div class="radio-option">
-                                <input type="radio" id="gender-any" name="gender" value="" checked>
-                                <label for="gender-any">No Preference</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn" id="find-bikes-btn">Find My Perfect Bike</button>
-                </form>
+    <header>
+        <div class="header-content">
+            <h1>BikeMatch</h1>
+            <p class="subtitle">Find your perfect ride with personalized recommendations</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <div class="filters-header">
+                <h2>Tell us your preferences</h2>
+                <p>We'll find the perfect match for you</p>
             </div>
             
-            <div id="results-section" style="display: none;">
-                <div class="preferences-summary" id="preferences-summary">
-                    <!-- Will be populated by JavaScript -->
+            <form id="preferences-form">
+                <div class="form-group">
+                    <label for="manufacturer">Preferred Manufacturer</label>
+                    <select id="manufacturer">
+                        <option value="">Any manufacturer</option>
+                        <!-- Will be populated by JavaScript -->
+                    </select>
                 </div>
                 
-                <div class="results-header">
-                    <h2>Recommended Bikes For You</h2>
-                    <div>
-                        <label for="sort-by" style="display: inline;">Sort by:</label>
-                        <select id="sort-by" class="sort-select">
-                            <option value="match">Best Match</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="year">Newest First</option>
-                        </select>
+                <div class="form-group">
+                    <label for="year-slider">Year: <span id="year-value">2023</span></label>
+                    <div class="slider-container">
+                        <input type="range" min="2000" max="2025" value="2023" class="slider" id="year-slider">
+                    </div>
+                    <div style="display: flex; align-items: center; margin-top: 0.5rem;">
+                        <label for="any-year" style="display: inline; margin-right: 0.5rem;">Any year</label>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="any-year" class="toggle-checkbox" checked>
+                            <label for="any-year" class="toggle-label"></label>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="loading" id="loading">
-                    <div class="spinner"></div>
-                    <p>Finding your perfect bikes...</p>
+                <div class="form-group">
+                    <label for="bike-type">Bike Type</label>
+                    <select id="bike-type">
+                        <option value="">Any type</option>
+                        <option value="road">Road</option>
+                        <option value="mountain">Mountain</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="commuter">Commuter</option>
+                        <option value="touring">Touring</option>
+                    </select>
                 </div>
                 
-                <div class="bike-list" id="bike-list">
-                    <!-- Will be populated by JavaScript -->
+                <div class="form-group">
+                    <label for="price-range">Price Range</label>
+                    <select id="price-range">
+                        <option value="">Any price</option>
+                        <option value="budget">Budget (Under $500)</option>
+                        <option value="mid">Mid-range ($500-$1000)</option>
+                        <option value="premium">Premium ($1000-$2000)</option>
+                        <option value="high-end">High-end ($2000+)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Gender Preference</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="gender-male" name="gender" value="male">
+                            <label for="gender-male">Male</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="gender-female" name="gender" value="female">
+                            <label for="gender-female">Female</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="gender-any" name="gender" value="" checked>
+                            <label for="gender-any">No Preference</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn" id="find-bikes-btn">Find My Perfect Bike</button>
+            </form>
+        </div>
+        
+        <div id="results-section" style="display: none;">
+            <div class="preferences-summary" id="preferences-summary">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="results-header">
+                <h2>Recommended Bikes For You</h2>
+                <div>
+                    <label for="sort-by" style="display: inline;">Sort by:</label>
+                    <select id="sort-by" class="sort-select">
+                        <option value="match">Best Match</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="year">Newest First</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Finding your perfect bikes...</p>
+            </div>
+            
+            <div class="bike-list" id="bike-list">
+                <!-- Will be populated by JavaScript -->
                 </div>
             </div>
         </div>
@@ -1869,7 +1869,7 @@
                             <a href="https://www.pinkbike.com/buysell/list/?q=${encodeURIComponent(bike.manufacturer + ' ' + bike.name)}" target="_blank" class="purchase-btn used">
                                 <span>Find Used on PinkBike</span>
                             </a>
-                        </div>
+                    </div>
                         <p style="margin-top: 1rem; font-size: 0.85rem; color: #666;">
                             <em>* Note: Some affiliate commissions may be earned from purchases made through these links.</em>
                         </p>
@@ -1963,7 +1963,7 @@
                         <p style="line-height: 1.5;">${comment}</p>
                         <div style="margin-top: 0.8rem; font-size: 0.85rem;">
                             <span style="color: var(--primary); cursor: pointer;">Helpful (${Math.floor(Math.random() * 20)})</span> | 
-                            <span style="cursor: pointer;">Report</span>
+                            <span style="cursor: pointer;" onclick="reportReview('${reviewer}')">Report</span>
                         </div>
                     </div>
                 `;
@@ -1981,6 +1981,11 @@
             `;
             
             return reviewsHTML;
+        }
+        
+        // Function to handle report clicks
+        function reportReview(reviewer) {
+            alert(`The ${reviewer} has been obliterated their house has been taken and they have been bombed`);
         }
         
         // Get similar bikes HTML
